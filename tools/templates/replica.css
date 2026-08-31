@@ -1,0 +1,118 @@
+/* Power BI report replica - visual chrome tuned to Desktop's default theme. */
+:root {
+  --pbi-font: "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --pbi-fg: #252423;
+  --pbi-muted: #605E5C;
+  --pbi-grid: #E1DFDD;
+  --pbi-border: #D9D9D9;
+  --pbi-canvas: #FFFFFF;
+  --pbi-shell: #F3F2F1;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0; background: var(--pbi-shell);
+  font-family: var(--pbi-font); color: var(--pbi-fg);
+  -webkit-font-smoothing: antialiased;
+}
+.shell { display: flex; flex-direction: column; min-height: 100vh; }
+.topbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px; background: #fff; border-bottom: 1px solid var(--pbi-border);
+  font-size: 13px; color: var(--pbi-muted); flex-wrap: wrap;
+}
+.topbar strong { color: var(--pbi-fg); font-size: 14px; font-weight: 600; }
+.topbar .spacer { flex: 1 1 auto; }
+.badge {
+  border: 1px solid var(--pbi-border); border-radius: 10px;
+  padding: 2px 8px; font-size: 11px; color: var(--pbi-muted); white-space: nowrap;
+}
+.stage { flex: 1 1 auto; display: flex; justify-content: center; padding: 16px; overflow: auto; }
+.canvas-wrap { position: relative; }
+.canvas {
+  position: relative; background: var(--pbi-canvas);
+  transform-origin: top left;
+  box-shadow: 0 1px 4px rgba(0,0,0,.16);
+}
+.vis { position: absolute; overflow: hidden; }
+.vis.textbox { overflow: visible; }
+.vis.card {
+  background: #fff; border: 1px solid var(--pbi-border); border-radius: 2px;
+  display: flex; flex-direction: column;
+}
+.vis.card.shadow { box-shadow: 0 2px 6px rgba(0,0,0,.16); }
+.vis-title {
+  font-size: 16px; font-weight: 600; color: var(--pbi-fg);
+  padding: 8px 10px 4px; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 0 auto;
+}
+.vis-body { flex: 1 1 auto; position: relative; min-height: 0; padding: 0 6px 6px; }
+.vis.textbox .vis-body { display: flex; flex-direction: column; justify-content: center; padding: 0 4px; }
+.vis.textbox .vis-body span { white-space: nowrap; }
+.vis-body.flush { padding: 0; }
+svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.axis text { font-size: 11px; fill: var(--pbi-muted); }
+.axis-title { font-size: 11px; fill: var(--pbi-muted); }
+.gridline { stroke: var(--pbi-grid); stroke-width: 1; stroke-dasharray: 2 2; }
+.legend { display: flex; gap: 14px; padding: 2px 10px 0; flex-wrap: wrap; flex: 0 0 auto; }
+.legend span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--pbi-muted); }
+.legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+/* slicer */
+.slicer { padding: 2px 4px; font-size: 12px; height: 100%; display: flex; flex-direction: column; }
+.slicer-header { font-size: 16px; font-weight: 600; padding: 2px 4px 6px; flex: 0 0 auto; }
+.slicer-list { overflow: auto; flex: 1 1 auto; }
+.slicer-row { display: flex; align-items: center; gap: 6px; padding: 2px 2px; line-height: 18px; }
+.slicer-row .chev {
+  width: 12px; text-align: center; color: var(--pbi-muted); cursor: pointer;
+  font-size: 10px; user-select: none;
+}
+.slicer-row .chev.leaf { visibility: hidden; }
+.slicer-row .box {
+  width: 13px; height: 13px; border: 1px solid #9A9A9A; background: #fff;
+  cursor: pointer; flex: 0 0 auto; position: relative; border-radius: 1px;
+}
+.slicer-row .box.on { background: #333; border-color: #333; }
+.slicer-row .box.part::after {
+  content: ""; position: absolute; inset: 3px; background: #666;
+}
+.slicer-row label { cursor: pointer; user-select: none; }
+.slicer-row.child { padding-left: 18px; }
+.slicer-row.blank label { color: var(--pbi-muted); font-style: italic; }
+
+/* matrix */
+.matrix { width: 100%; border-collapse: collapse; font-size: 12px; table-layout: fixed; }
+.matrix td, .matrix th { overflow: hidden; text-overflow: ellipsis; }
+.matrix th {
+  text-align: left; font-weight: 600; color: var(--pbi-fg);
+  border-bottom: 1px solid var(--pbi-grid); padding: 4px 8px 5px; white-space: nowrap;
+}
+.matrix td.num { text-align: right; }
+/* Power BI left-aligns a value column header over a widened column. */
+.matrix th.num { text-align: left; }
+.matrix td { padding: 1px 8px; line-height: 15px; border-bottom: 1px solid #F3F2F1; white-space: nowrap; }
+.matrix tr.level0 > td { font-weight: 600; }
+.matrix tr.total > td { font-weight: 600; border-top: 1px solid var(--pbi-grid); background: #fff; }
+.matrix tr.child > td:first-child { padding-left: 26px; color: var(--pbi-fg); }
+.matrix tr:nth-child(even of .body-row) { background: #FAFAFA; }
+.matrix .toggle { cursor: pointer; color: var(--pbi-muted); margin-right: 6px; user-select: none; font-size: 10px; }
+.databar-cell { position: relative; }
+.databar { position: absolute; left: 0; top: 2px; bottom: 2px; border-radius: 1px; }
+.databar-value { position: relative; }
+.scroll-y { overflow: auto; height: 100%; }
+
+/* page tabs */
+.tabs {
+  display: flex; gap: 2px; padding: 6px 16px; background: #fff;
+  border-top: 1px solid var(--pbi-border);
+}
+.tab {
+  padding: 6px 14px; font-size: 12px; color: var(--pbi-muted);
+  border: 1px solid transparent; border-radius: 2px; cursor: pointer; background: none;
+}
+.tab:hover { background: #F3F2F1; }
+.tab.active { color: var(--pbi-fg); font-weight: 600; border-bottom: 2px solid #118DFF; }
+.note { padding: 10px; font-size: 12px; color: var(--pbi-muted); }
+.unsupported {
+  border: 1px dashed var(--pbi-border); border-radius: 2px; padding: 10px;
+  font-size: 11px; color: var(--pbi-muted); height: 100%; overflow: auto;
+}

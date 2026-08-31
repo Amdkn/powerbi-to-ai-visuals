@@ -1,0 +1,14 @@
+# Everything the pipeline produces. Regenerate with ./run_all.sh <file>.
+build/
+
+# pbixray + native codecs, installed by ./setup.sh.
+# Platform-specific wheels: they must be built per machine, never committed.
+vendor/
+
+__pycache__/
+*.pyc
+
+# Power BI files belong to whoever made them. Do not commit a client's model.
+*.pbix
+*.pbip
+*.abf
