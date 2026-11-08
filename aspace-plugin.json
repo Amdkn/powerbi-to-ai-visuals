@@ -1,0 +1,22 @@
+{
+  "$schema": "https://aspaceos.tech/schemas/cordis-fiber-v5.json",
+  "name": "@aspace-v5/powerbi-to-ai-visuals",
+  "submodule_path": "01_Forkable/FKB07_Money_Maker/powerbi-to-ai-visuals",
+  "sovereign_fork_url": "https://github.com/Amdkn/powerbi-to-ai-visuals.git",
+  "branch": "aspace-v5-native",
+  "family": "AREAS_OS_EXECUTION_PLUGIN",
+  "fractal_layer": "16L",
+  "holon_owner": "J1-JERRY / B1..I1",
+  "capabilities": [
+    "cordis_revertible_fiber",
+    "areas_os_ld01_ld08"
+  ],
+  "a0_integration_target": "00_Memoire/bundle/areas_os/J1_Jerry_Macro_CrossOS/registry-578-holons.json",
+  "egm_gateway_endpoint": "http://127.0.0.1:31415/v1/chat/completions",
+  "shared_brain_path": "00_Memoire/shared_brain/memory.jsonl",
+  "cordis_contract": {
+    "everything_is_a_plugin": true,
+    "revertible_effects": true,
+    "reactive_coeffects": true
+  }
+}
